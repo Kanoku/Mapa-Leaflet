@@ -13,7 +13,7 @@
 	<div id="mapid"></div>
 	<script>
 		var map = L.map('mapid', {zoomControl:false, dragging:false}).setView([37.242331, -3.562764], 15);
-		L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {
 		attribution: 'Map data &copy; <a href="http://openstreemap.org">OpenStreetMap</a>',
 		maxZoom: 15
 		}).addTo(map);
