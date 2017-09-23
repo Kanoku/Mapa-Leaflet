@@ -12,12 +12,13 @@
 	<h2>Alfacar</h2>
 	<div id="mapid"></div>
 	<script>
-		var map = L.map('mapid').setView([37.242331, -3.562764], 15);
+		var map = L.map('mapid', {zoomControl:false, dragging:false}).setView([37.242331, -3.562764], 15);
 		L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		attribution: 'Map data &copy; <a href="http://openstreemap.org">OpenStreetMap</a>',
 		maxZoom: 15
 		}).addTo(map);
-		L.marker([37.246660, -3.553813],{draggable:false, title 'fuente grande'}).addTo(map);̣
+		L.marker([37.246660, -3.553813],{draggable:false, title:'fuente grande'}).addTo(map);
+		map.scrollWheelZoom.disable();
 	</script>
 </body>
 </html>
