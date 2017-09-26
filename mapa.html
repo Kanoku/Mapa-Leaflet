@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
 	<title>Mapa de Alfacar</title>
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
 	<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
@@ -12,14 +13,41 @@
 	<h2>Alfacar</h2>
 	<div id="mapid"></div>
 	<script>
-		var map = L.map('mapid', {zoomControl:false, dragging:false}).setView([37.242331, -3.562764], 15);
-		L.tileLayer('http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-		attribution: 'Map data &copy; <a href="http://openstreemap.org">OpenStreetMap</a>',
-		maxZoom: 15
-		}).addTo(map);
-		L.marker([37.246660, -3.553813],{draggable:false, title:'fuente grande'}).addTo(map);
+		var normal   = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+						attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+						maxZoom: 15
+					});
+			topo  = L.tileLayer('http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+					attribution: 'Map data &copy; <a href="http://openstreemap.org">OpenStreetMap</a>',
+					maxZoom: 15
+					});
+
+		var map = L.map('mapid', {
+			zoomControl:false, 
+			dragging:false,
+			layers: [normal, topo]
+			});
+
 		map.scrollWheelZoom.disable();
-		map.locate({setView:true});
+		map.locate({setView:true})
+			.on('locationfound', function(e){
+			            var marker = L.marker([e.latitude, e.longitude]).bindPopup('Estas aquí');
+			            var circle = L.circle([e.latitude, e.longitude], e.accuracy/2, {
+			                weight: 1,
+			                color: 'blue',
+			                fillColor: '#dadada',
+			                fillOpacity: 0.6
+			            });
+			            map.addLayer(marker);
+			            map.addLayer(circle);
+			});
+
+		var baseLayers = {
+				"Normal": normal,
+				"Topo": topo
+			};
+
+		L.control.layers(baseLayers).addTo(map);
 	</script>
 </body>
 </html>
