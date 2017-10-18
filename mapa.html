@@ -1,25 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Mapa de Alfacar</title>
+	<meta charset="utf-8">
+	<title>Examen Tema 1 - GitHUB vs Leaflet</title>
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
 	<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
-	<style>
-		#mapid { height: 600px; }
-	</style>
+	<link rel="stylesheet" href="estilo.css">
+	<script type="text/javascript" src="map.js"></script>
 </head>
 <body>
-	<h2>Alfacar</h2>
+	<h2>Geolocalización</h2>
 	<div id="mapid"></div>
-	<script>
-		var map = L.map('mapid', {zoomControl:false, dragging:false}).setView([37.242331, -3.562764], 15);
-		L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
-		maxZoom: 15
-		}).addTo(map);
-		// L.marker([37.246660, -3.553813], {draggable:false, title:'Fuente grande'}).addTo(map);
-		map.scrollWheelZoom.disable();
-		map.locate({setView:true});
-	</script>
 </body>
 </html>
